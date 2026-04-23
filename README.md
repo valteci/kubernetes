@@ -18,6 +18,8 @@
 
 
 # 5. Crie um namespace "lab" com configurações personalizadas
+Se não quiser ficar rodando esses comandos toda vez, basta usar os scirpts lab-down.sh e lab-up.sh para subir e derrubar o namespace.
+
 * Crie o seu lab:
 ```bash
 kubectl create namespace lab
@@ -68,4 +70,8 @@ kubectl -n lab describe quota lab-quota
 
 
 
-#
+# Aplicando arquivos de maneira declarativa:
+```bash
+kubectl apply -f pod.yaml
+```
+
