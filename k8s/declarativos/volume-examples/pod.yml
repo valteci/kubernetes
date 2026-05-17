@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-pv-test
+  namespace: lab
+  labels:
+    app: pod-pv-test
+spec:
+  nodeSelector:
+    topology.kubernetes.io/zone: us-central1-a
+  containers:
+    - name: app
+      image: alpine:3.20
+      command: ["sh", "-c", "sleep 3600"]
+      volumeMounts:
+        - name: dados
+          mountPath: /data
+      resources:
+        requests:
+          cpu: "100m"
+          memory: "128Mi"
+        limits:
+          cpu: "250m"
+          memory: "256Mi"
+  volumes:
+    - name: dados
+      persistentVolumeClaim:
+        claimName: pvc-disk-pv
+        readOnly: false

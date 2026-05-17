@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-disk-pv
+  labels:
+    app.kubernetes.io/name: storage-lab
+    app.kubernetes.io/component: persistent-volume
+spec:
+  storageClassName: manual-disk-pv
+  persistentVolumeReclaimPolicy: Retain
+  capacity:
+    storage: 10G
+  accessModes:
+    - ReadWriteOnce
+  volumeMode: Filesystem
+  claimRef:
+    namespace: lab
+    name: pvc-disk-pv
+  csi:
+    driver: pd.csi.storage.gke.io
+    volumeHandle: projects/studious-linker-449214-u7/zones/us-central1-a/disks/disk-pv
+    fsType: ext4
